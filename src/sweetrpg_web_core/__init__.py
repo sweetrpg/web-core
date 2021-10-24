@@ -2,10 +2,10 @@
 """
 """
 
-__title__ = "SweetRPG API Core"
-__description__ = "Common code for API microservice applications"
-__url__ = "https://github.com/sweetrpg/api-core"
-__version__ = "0.0.14"
+__title__ = "SweetRPG Web Core"
+__description__ = "Common code for Web frontend microservice applications"
+__url__ = "https://github.com/sweetrpg/web-core"
+__version__ = "0.0.0"
 __build__ = 0x000000
 __author__ = "Paul Schifferer"
 __author_email__ = "dm@sweetrpg.com"

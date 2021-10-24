@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 __author__ = "Paul Schifferer <dm@sweetrpg.com>"
-"""API exceptions
+"""Web exceptions
 """
 
 from werkzeug.exceptions import HTTPException

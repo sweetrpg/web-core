@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 __author__ = "Paul Schifferer <dm@sweetrpg.com>"
 """
-auth.py
-- Authentication and authorization endpoints.
+health.py
+- Health endpoints.
 """
 
 
