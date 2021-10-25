@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = "Paul Schifferer <dm@sweetrpg.com>"
-"""
-health.py
-- Health endpoints.
+"""health.py
+Health endpoints.
 """
 
 
