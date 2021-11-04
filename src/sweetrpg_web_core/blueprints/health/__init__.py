@@ -8,7 +8,7 @@ from flask import Blueprint, current_app, jsonify
 from werkzeug.exceptions import HTTPException
 import json
 import os
-import constants
+from sweetrpg_web_core import constants
 
 
 blueprint = Blueprint("health", __name__, url_prefix="/health")
