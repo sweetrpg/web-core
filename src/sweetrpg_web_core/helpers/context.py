@@ -15,5 +15,6 @@ def get_context() -> dict:
             'id': session.get(constants.SESSION_EMAIL),
             'email': session.get(constants.SESSION_USER_ID),
         },
-        'base_path': os.environ.get('APPLICATION_BASE_PATH') or ""
+        'base_path': os.environ.get(constants.APPLICATION_BASE_PATH, ""),
+        'static_asset_prefix': os.environ.get(constants.STATIC_ASSET_PREFIX, "")
     }
