@@ -98,7 +98,6 @@ jobs:
                     - repo: library-objects
                     - repo: api-core
                     - repo: library-api
-                    - repo: web-core
                     - repo: client
                     - repo: library-web
                     - repo: main-web
