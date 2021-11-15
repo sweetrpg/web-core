@@ -70,7 +70,7 @@ packaging==21.0
     #   pytest
     #   sphinx
     #   tox
-pallets-sphinx-themes==2.0.1
+pallets-sphinx-themes==2.0.2
     # via -r requirements/docs.in
 pathspec==0.9.0
     # via black
