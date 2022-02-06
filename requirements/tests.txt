@@ -8,7 +8,7 @@ asgiref==3.4.1
     # via -r requirements/tests.in
 attrs==21.2.0
     # via pytest
-backports-entry-points-selectable==1.1.0
+backports-entry-points-selectable==1.1.1
     # via virtualenv
 blinker==1.4
     # via -r requirements/tests.in
