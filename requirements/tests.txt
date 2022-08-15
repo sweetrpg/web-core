@@ -71,7 +71,7 @@ toml==0.10.2
     #   coverage
     #   pytest
     #   tox
-tox==3.24.5
+tox==3.25.1
     # via -r requirements/tests.in
 virtualenv==20.9.0
     # via tox
