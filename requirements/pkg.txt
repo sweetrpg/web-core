@@ -8,6 +8,8 @@ click==8.0.3
     # via flask
 flask==2.1.3
     # via -r requirements/pkg.in
+importlib-metadata==4.12.0
+    # via flask
 itsdangerous==2.0.1
     # via flask
 jinja2==3.0.2
@@ -16,3 +18,5 @@ markupsafe==2.0.1
     # via jinja2
 werkzeug==2.0.2
     # via flask
+zipp==3.8.1
+    # via importlib-metadata
