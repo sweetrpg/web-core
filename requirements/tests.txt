@@ -10,7 +10,7 @@ attrs==21.2.0
     # via pytest
 backports-entry-points-selectable==1.1.1
     # via virtualenv
-blinker==1.4
+blinker==1.5
     # via -r requirements/tests.in
 click==8.0.3
     # via flask
