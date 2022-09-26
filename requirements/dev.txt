@@ -151,9 +151,10 @@ toml==0.10.2
 tomli==1.2.1
     # via
     #   black
+    #   pep517
+tox==3.25.1
     #   build
     #   pytest
-tox==3.24.5
     # via -r requirements/tests.in
 urllib3==1.26.7
     # via requests
