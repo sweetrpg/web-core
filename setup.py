@@ -4,7 +4,7 @@ from setuptools import setup
 setup(
     name="sweetrpg-web-core",
     install_requires=[
-        "Flask>=2.0",
+        "Flask<3.0",
     ],
     extras_require={},
 )
