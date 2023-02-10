@@ -3,6 +3,6 @@ asgiref
 blinker
 coverage-badge==1.1.0
 pytest
-pytest-cov==3.0
+pytest-cov==4.0
 tox<5
 python-dotenv==0.21.0
