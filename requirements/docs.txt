@@ -26,7 +26,7 @@ docutils==0.16
     #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
-flask==2.1.3
+flask==2.2.2
     # via -r requirements/pkg.in
 idna==3.3
     # via requests
@@ -38,8 +38,10 @@ jinja2==3.0.2
     # via
     #   flask
     #   sphinx
-markupsafe==2.0.1
-    # via jinja2
+markupsafe==2.1.2
+    # via
+    #   jinja2
+    #   werkzeug
 packaging==21.0
     # via
     #   pallets-sphinx-themes
@@ -106,5 +108,5 @@ typing-extensions==4.3.0
     # via pydantic
 urllib3==1.26.7
     # via requests
-werkzeug==2.0.2
+werkzeug==2.2.2
     # via flask
