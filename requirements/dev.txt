@@ -166,6 +166,8 @@ toml==0.10.2
     #   tox
 tomli==1.2.1
     # via
+    #   black
+    #   build
     #   pep517
     #   pytest
 tox==3.25.1
