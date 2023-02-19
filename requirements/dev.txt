@@ -97,9 +97,7 @@ pluggy==1.0.0
     #   pytest
     #   tox
 py==1.10.0
-    # via
-    #   pytest
-    #   tox
+    # via tox
 pydantic==1.9.2
     # via
     #   rstcheck
@@ -109,7 +107,7 @@ pygments==2.10.0
     #   rich
     #   sphinx
     #   sphinx-tabs
-pytest==7.1.3
+pytest==7.2.1
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -165,11 +163,7 @@ toml==0.10.2
     #   coverage
     #   tox
 tomli==1.2.1
-    # via
-    #   black
-    #   build
-    #   pep517
-    #   pytest
+    # via pep517
 tox==3.25.1
     # via -r requirements/tests.in
 typer[all]==0.6.1

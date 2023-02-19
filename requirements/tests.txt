@@ -49,12 +49,10 @@ pluggy==1.0.0
     #   pytest
     #   tox
 py==1.10.0
-    # via
-    #   pytest
-    #   tox
+    # via tox
 pyparsing==3.0.0
     # via packaging
-pytest==7.1.3
+pytest==7.2.1
     # via
     #   -r requirements/tests.in
     #   pytest-cov
@@ -70,8 +68,6 @@ toml==0.10.2
     # via
     #   coverage
     #   tox
-tomli==2.0.1
-    # via pytest
 tox==3.25.1
     # via -r requirements/tests.in
 virtualenv==20.9.0
