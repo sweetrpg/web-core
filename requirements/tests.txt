@@ -26,7 +26,7 @@ filelock==3.3.1
     # via
     #   tox
     #   virtualenv
-flask==2.2.2
+flask==2.2.3
     # via -r requirements/pkg.in
 iniconfig==1.1.1
     # via pytest

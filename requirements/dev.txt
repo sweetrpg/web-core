@@ -52,7 +52,7 @@ filelock==3.3.1
     # via
     #   tox
     #   virtualenv
-flask==2.2.2
+flask==2.2.3
     # via -r requirements/pkg.in
 idna==3.3
     # via requests
@@ -166,8 +166,6 @@ toml==0.10.2
     #   tox
 tomli==1.2.1
     # via
-    #   black
-    #   build
     #   pep517
     #   pytest
 tox==3.25.1
