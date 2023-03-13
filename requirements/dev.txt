@@ -44,7 +44,6 @@ distlib==0.3.3
     # via virtualenv
 docutils==0.16
     # via
-    #   rstcheck
     #   rstcheck-core
     #   sphinx
     #   sphinx-tabs
@@ -101,9 +100,7 @@ py==1.10.0
     #   pytest
     #   tox
 pydantic==1.9.2
-    # via
-    #   rstcheck
-    #   rstcheck-core
+    # via rstcheck-core
 pygments==2.10.0
     # via
     #   rich
@@ -123,7 +120,7 @@ requests==2.26.0
     # via sphinx
 rich==12.5.1
     # via typer
-rstcheck==6.1.0
+rstcheck==6.1.2
     # via -r requirements/docs.in
 rstcheck-core==1.0.2
     # via rstcheck
@@ -175,9 +172,7 @@ tox==3.25.1
 typer[all]==0.6.1
     # via rstcheck
 types-docutils==0.18.3
-    # via
-    #   rstcheck
-    #   rstcheck-core
+    # via rstcheck-core
 typing-extensions==4.3.0
     # via pydantic
 urllib3==1.26.7
