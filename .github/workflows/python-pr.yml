@@ -34,7 +34,7 @@ jobs:
                     #   }
                     # - { name: Mac, python: "3.10", os: macos-latest, tox: py310 }
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
             - uses: actions/setup-python@v2
               with:
                   python-version: ${{ matrix.python }}
@@ -45,7 +45,7 @@ jobs:
                   python -m pip install -U pip
             - name: get-pip-cache-dir
               id: pip-cache
-              run: echo "::set-output name=dir::$(pip cache dir)"
+              run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
             - name: cache-pip
               uses: actions/cache@v2
               with:
@@ -53,7 +53,7 @@ jobs:
                   key: pip|${{ runner.os }}|${{ matrix.python }}|${{ hashFiles('setup.py') }}|${{ hashFiles('requirements/*.txt') }}
             - name: install-utils
               run: pip install tox
-            # - name: lint
-            #   run: black --check -t py310 --diff --color src
+            - name: lint
+              run: black --check -t py310 --diff --color src
             - name: tests
               run: tox -e ${{ matrix.tox }}
