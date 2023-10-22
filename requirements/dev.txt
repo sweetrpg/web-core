@@ -6,7 +6,7 @@
 #
 alabaster==0.7.12
     # via sphinx
-asgiref==3.5.2
+asgiref==3.6.0
     # via -r requirements/tests.in
 attrs==21.2.0
     # via pytest
@@ -166,8 +166,6 @@ toml==0.10.2
     # via coverage
 tomli==2.0.1
     # via
-    #   black
-    #   build
     #   pep517
     #   pyproject-api
     #   pytest
