@@ -175,7 +175,9 @@ tomli==2.0.1
 tox==4.6.4
     # via -r requirements/tests.in
 typer[all]==0.6.1
-    # via rstcheck
+    # via
+    #   rstcheck
+    #   typer
 types-docutils==0.18.3
     # via
     #   rstcheck
