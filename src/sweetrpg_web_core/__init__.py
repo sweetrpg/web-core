@@ -5,7 +5,7 @@
 __title__ = "SweetRPG Web Core"
 __description__ = "Common code for Web frontend microservice applications"
 __url__ = "https://github.com/sweetrpg/web-core"
-__version__ = "0.0.513"
+__version__ = "0.0.514"
 __build__ = 0x000000
 __author__ = "Paul Schifferer"
 __author_email__ = "dm@sweetrpg.com"
