@@ -2,7 +2,7 @@
 asgiref~=3.0
 blinker~=1.0
 coverage-badge~=1.0
-dnspython~=2.0
+dnspython~=2.8
 pytest-cov~=4.0
 pytest-env~=1.0
 pytest-ordering~=0.6
