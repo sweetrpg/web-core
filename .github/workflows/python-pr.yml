@@ -57,3 +57,21 @@ jobs:
               run: black --check -t py311 --diff --color src
             - name: tests
               run: tox -e ${{ matrix.tox }}
+            - name: coverage-summary
+              run: |
+                  echo "## Python coverage" >> "$GITHUB_STEP_SUMMARY"
+                  echo '```' >> "$GITHUB_STEP_SUMMARY"
+                  tox exec -e ${{ matrix.tox }} -- coverage report -m >> "$GITHUB_STEP_SUMMARY"
+                  echo '```' >> "$GITHUB_STEP_SUMMARY"
+                  tox exec -e ${{ matrix.tox }} -- coverage xml
+                  tox exec -e ${{ matrix.tox }} -- coverage html
+            - name: upload-coverage-artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: coverage-report-${{ matrix.name }}
+                  path: |
+                      htmlcov/
+                      coverage.xml
+            - name: coverage-threshold
+              continue-on-error: true
+              run: tox exec -e ${{ matrix.tox }} -- coverage report --fail-under=0
