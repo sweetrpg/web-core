@@ -107,11 +107,15 @@ jobs:
               run: pip install -r requirements/docs.txt
             - name: make-docs
               run: cd docs && make html
+            # keep_files: true - without it, this root-level publish (no destination_dir)
+            # wipes the whole branch by default, deleting the tests job's coverage/
+            # subfolder that ran moments earlier in the same workflow.
             - name: publish-docs
               uses: peaceiris/actions-gh-pages@v3
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./docs/_build/html
+                  keep_files: true
 
     publish:
         needs: [tests]
