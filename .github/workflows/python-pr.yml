@@ -6,10 +6,8 @@ on:
         paths:
             - "src/**"
             - "tests/**"
-            - setup.cfg
-            - setup.py
-            - tox.ini
-            - "requirements/**"
+            - pyproject.toml
+            - uv.lock
             - "docs/**"
 
 jobs:
@@ -24,47 +22,28 @@ jobs:
                           name: Linux,
                           python: "3.11",
                           os: ubuntu-latest,
-                          tox: py311,
                       }
-                    # - {
-                    #       name: Windows,
-                    #       python: "3.11",
-                    #       os: windows-latest,
-                    #       tox: py311,
-                    #   }
-                    # - { name: Mac, python: "3.11", os: macos-latest, tox: py311 }
         steps:
             - uses: actions/checkout@v4
-            - uses: actions/setup-python@v5
+            - name: install-uv
+              uses: astral-sh/setup-uv@v5
               with:
                   python-version: ${{ matrix.python }}
-            - name: update-pip
-              run: |
-                  pip install -U wheel
-                  pip install -U setuptools
-                  python -m pip install -U pip
-            - name: get-pip-cache-dir
-              id: pip-cache
-              run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
-            - name: cache-pip
-              uses: actions/cache@v4
-              with:
-                  path: ${{ steps.pip-cache.outputs.dir }}
-                  key: pip|${{ runner.os }}|${{ matrix.python }}|${{ hashFiles('setup.py') }}|${{ hashFiles('requirements/*.txt') }}
-            - name: install-utils
-              run: pip install tox
+                  enable-cache: true
+            - name: sync-deps
+              run: uv sync --group test --frozen
             - name: lint
-              run: black --check -t py311 --diff --color src
+              run: uvx black --check -t py311 --diff --color src
             - name: tests
-              run: tox -e ${{ matrix.tox }}
+              run: uv run pytest -v tests
             - name: coverage-summary
               run: |
                   echo "## Python coverage" >> "$GITHUB_STEP_SUMMARY"
                   echo '```' >> "$GITHUB_STEP_SUMMARY"
-                  tox exec -e ${{ matrix.tox }} -- coverage report -m >> "$GITHUB_STEP_SUMMARY"
+                  uv run coverage report -m >> "$GITHUB_STEP_SUMMARY"
                   echo '```' >> "$GITHUB_STEP_SUMMARY"
-                  tox exec -e ${{ matrix.tox }} -- coverage xml
-                  tox exec -e ${{ matrix.tox }} -- coverage html
+                  uv run coverage xml
+                  uv run coverage html
             - name: upload-coverage-artifact
               uses: actions/upload-artifact@v4
               with:
@@ -74,4 +53,4 @@ jobs:
                       coverage.xml
             - name: coverage-threshold
               continue-on-error: true
-              run: tox exec -e ${{ matrix.tox }} -- coverage report --fail-under=0
+              run: uv run coverage report --fail-under=0

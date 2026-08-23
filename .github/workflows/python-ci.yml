@@ -6,10 +6,8 @@ on:
         paths:
             - "src/**"
             - "tests/**"
-            - setup.cfg
-            - setup.py
-            - tox.ini
-            - "requirements/*.txt"
+            - pyproject.toml
+            - uv.lock
             - "docs/**"
             - "pytest.ini"
             - ".github/workflows/**"
@@ -32,39 +30,27 @@ jobs:
                           name: Linux,
                           python: "3.11",
                           os: ubuntu-latest,
-                          tox: py311,
                       }
         steps:
             - uses: actions/checkout@v4
-            - uses: actions/setup-python@v5
+            - name: install-uv
+              uses: astral-sh/setup-uv@v5
               with:
                   python-version: ${{ matrix.python }}
-            - name: update-pip
-              run: |
-                  pip install -U wheel
-                  pip install -U setuptools
-                  python -m pip install -U pip
-            - name: get-pip-cache-dir
-              id: pip-cache
-              run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
-            - name: cache-pip
-              uses: actions/cache@v4
-              with:
-                  path: ${{ steps.pip-cache.outputs.dir }}
-                  key: pip|${{ runner.os }}|${{ matrix.python }}|${{ hashFiles('setup.py') }}|${{ hashFiles('requirements/*.txt') }}
-            - name: install-utils
-              run: pip install tox
+                  enable-cache: true
+            - name: sync-deps
+              run: uv sync --group test --frozen
             - name: tests
-              run: tox -e ${{ matrix.tox }}
+              run: uv run pytest -v tests
             - name: coverage-summary
               run: |
                   echo "## Python coverage" >> "$GITHUB_STEP_SUMMARY"
                   echo '```' >> "$GITHUB_STEP_SUMMARY"
-                  tox exec -e ${{ matrix.tox }} -- coverage report -m >> "$GITHUB_STEP_SUMMARY"
+                  uv run coverage report -m >> "$GITHUB_STEP_SUMMARY"
                   echo '```' >> "$GITHUB_STEP_SUMMARY"
                   mkdir -p coverage-pages
-                  tox exec -e ${{ matrix.tox }} -- coverage xml -o coverage-pages/coverage.xml
-                  tox exec -e ${{ matrix.tox }} -- coverage html -d coverage-pages/htmlcov
+                  uv run coverage xml -o coverage-pages/coverage.xml
+                  uv run coverage html -d coverage-pages/htmlcov
             - name: upload-coverage-artifact
               uses: actions/upload-artifact@v4
               with:
@@ -74,7 +60,7 @@ jobs:
             # as a flagged step.
             - name: coverage-threshold
               continue-on-error: true
-              run: tox exec -e ${{ matrix.tox }} -- coverage report --fail-under=0
+              run: uv run coverage report --fail-under=0
             # Written alongside the HTML/XML report so the publish step below carries it
             # to GitHub Pages - avoids committing to the source branch. Published under
             # destination_dir: coverage rather than the root, since the docs job below
@@ -83,7 +69,7 @@ jobs:
             - name: coverage-badge
               continue-on-error: true
               run: |
-                  PCT=$(tox exec -e ${{ matrix.tox }} -- coverage report | grep '^TOTAL' | grep -oE '[0-9]+%' | tr -d '%')
+                  PCT=$(uv run coverage report | grep '^TOTAL' | grep -oE '[0-9]+%' | tr -d '%')
                   COLOR=$(awk -v p="$PCT" 'BEGIN { if (p>=80) print "brightgreen"; else if (p>=50) print "yellow"; else print "red" }')
                   printf '{"schemaVersion":1,"label":"coverage","message":"%s%%","color":"%s"}\n' \
                       "$PCT" "$COLOR" > coverage-pages/coverage-badge.json
@@ -100,13 +86,14 @@ jobs:
         concurrency: docs
         steps:
             - uses: actions/checkout@v4
-            - uses: actions/setup-python@v5
+            - name: install-uv
+              uses: astral-sh/setup-uv@v5
               with:
                   python-version: "3.11"
-            - name: install-deps
-              run: pip install -r requirements/docs.txt
+            - name: sync-deps
+              run: uv sync --group docs --frozen
             - name: make-docs
-              run: cd docs && make html
+              run: cd docs && uv run --group docs make html
             # keep_files: true - without it, this root-level publish (no destination_dir)
             # wipes the whole branch by default, deleting the tests job's coverage/
             # subfolder that ran moments earlier in the same workflow.
