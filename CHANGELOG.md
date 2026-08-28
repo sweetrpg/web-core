@@ -1,3 +1,8 @@
+## [0.1.1] - 2026-08-28
+
+### 🐛 Bug Fixes
+
+- *(ci)* Scope --cov to the package, not the whole rootdir
 # Changelog
 
 <!--next-version-placeholder-->
