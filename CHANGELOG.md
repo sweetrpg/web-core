@@ -1,3 +1,12 @@
+## [0.2.0] - 2026-08-28
+
+### 🚀 Features
+
+- Expose name/avatar_initial/is_admin in get_context()'s user dict
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.1.2
 ## [0.1.2] - 2026-08-28
 
 ### 🐛 Bug Fixes
