@@ -28,5 +28,24 @@ def test_get_context_hashes_email_for_gravatar():
         assert context["user"]["email_hash"] == expected_hash
         assert (
             context["user"]["gravatar_url"]
-            == f"https://www.gravatar.com/avatar/{expected_hash}"
+            == f"https://www.gravatar.com/avatar/{expected_hash}?s=64&d=404"
         )
+
+
+def test_get_context_derives_avatar_initial_and_admin_flag():
+    with app.test_request_context():
+        session[constants.SESSION_NAME] = "Paul Schifferer"
+        session[constants.SESSION_ROLES] = ["admin"]
+        context = get_context()
+        assert context["user"]["name"] == "Paul Schifferer"
+        assert context["user"]["avatar_initial"] == "P"
+        assert context["user"]["is_admin"] is True
+
+
+def test_get_context_non_admin_has_no_admin_flag():
+    with app.test_request_context():
+        session[constants.SESSION_NAME] = "Regular User"
+        session[constants.SESSION_ROLES] = ["member"]
+        context = get_context()
+        assert context["user"]["avatar_initial"] == "R"
+        assert context["user"]["is_admin"] is False
