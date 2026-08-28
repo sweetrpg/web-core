@@ -1,3 +1,12 @@
+## [0.1.2] - 2026-08-28
+
+### 🐛 Bug Fixes
+
+- *(ci)* Actually enable PyPI publishing in the release workflow
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.1.1
 ## [0.1.1] - 2026-08-28
 
 ### 🐛 Bug Fixes
