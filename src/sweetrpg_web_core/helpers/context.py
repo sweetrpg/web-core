@@ -15,17 +15,25 @@ def get_context() -> dict:
     :return:
     """
     email = session.get(constants.SESSION_EMAIL)
+    name = session.get(constants.SESSION_NAME)
+    roles = session.get(constants.SESSION_ROLES) or []
     email_hash = None
     gravatar_url = None
     if email:
         email_hash = hashlib.md5(email.strip().lower().encode("utf-8")).hexdigest()
-        gravatar_url = f"https://www.gravatar.com/avatar/{email_hash}"
+        # d=404 so a visitor with no Gravatar gets a real 404 rather than Gravatar's generic
+        # mystery-person image - the avatar-menu markup's onerror falls back to avatar_initial
+        # on load failure.
+        gravatar_url = f"https://www.gravatar.com/avatar/{email_hash}?s=64&d=404"
     return {
         "user": {
             "id": session.get(constants.SESSION_USER_ID),
+            "name": name,
             "email": email,
             "email_hash": email_hash,
             "gravatar_url": gravatar_url,
+            "avatar_initial": name[0].upper() if name else "",
+            "is_admin": "admin" in roles,
         },
         "base_path": os.environ.get(constants.APPLICATION_BASE_PATH, ""),
         "static_asset_prefix": os.environ.get(constants.STATIC_ASSET_PREFIX, ""),
