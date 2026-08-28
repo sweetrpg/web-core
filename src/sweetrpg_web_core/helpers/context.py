@@ -18,17 +18,17 @@ def get_context() -> dict:
     email_hash = None
     gravatar_url = None
     if email:
-        email_hash = hashlib.md5(email.strip().lower()).hexdigest()
+        email_hash = hashlib.md5(email.strip().lower().encode("utf-8")).hexdigest()
         gravatar_url = f"https://www.gravatar.com/avatar/{email_hash}"
     return {
-        'user': {
-            'id': session.get(constants.SESSION_USER_ID),
-            'email': email,
-            'email_hash': email_hash,
-            'gravatar_url': gravatar_url,
+        "user": {
+            "id": session.get(constants.SESSION_USER_ID),
+            "email": email,
+            "email_hash": email_hash,
+            "gravatar_url": gravatar_url,
         },
-        'base_path': os.environ.get(constants.APPLICATION_BASE_PATH, ""),
-        'static_asset_prefix': os.environ.get(constants.STATIC_ASSET_PREFIX, "")
+        "base_path": os.environ.get(constants.APPLICATION_BASE_PATH, ""),
+        "static_asset_prefix": os.environ.get(constants.STATIC_ASSET_PREFIX, ""),
     }
 
 
@@ -66,6 +66,8 @@ def populate_session() -> None:
         session[constants.PROFILE_KEY] = userinfo
 
     current_app.logger.info("Setting session values from request X-Forwarded-* headers")
-    session[constants.SESSION_ACCESS_TOKEN] = request.headers.get("X-Forwarded-Access-Token")
+    session[constants.SESSION_ACCESS_TOKEN] = request.headers.get(
+        "X-Forwarded-Access-Token"
+    )
     session[constants.SESSION_EMAIL] = request.headers.get("X-Forwarded-Email")
     session[constants.SESSION_USER_ID] = request.headers.get("X-Forwarded-User")
