@@ -1,3 +1,12 @@
+## [0.1.1] - 2026-08-28
+
+### 🐛 Bug Fixes
+
+- *(ci)* Scope --cov to the package, not the whole rootdir
+
+### ⚙️ Miscellaneous Tasks
+
+- *(release)* Merge master into develop after v0.1.0
 ## [0.1.0] - 2026-08-28
 
 ### 🚀 Features
