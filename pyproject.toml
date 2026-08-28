@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "sweetrpg-web-core"
-version = "0.0.697"
+dynamic = ["version"]
 description = "Core web framework for SweetRPG services"
 readme = "README.md"
 license = "MIT"
@@ -53,6 +53,9 @@ docs = [
     "rstcheck~=6.0",
 ]
 
+[tool.hatch.version]
+path = "src/sweetrpg_web_core/__init__.py"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/sweetrpg_web_core"]
 
@@ -71,9 +74,3 @@ source = [
 source = [
     "src",
 ]
-
-[tool.semantic_release]
-version_variable = "src/sweetrpg_web_core/__init__.py:__version__"
-branch = "develop"
-upload_to_pypi = false
-tag_format = "{version}"
