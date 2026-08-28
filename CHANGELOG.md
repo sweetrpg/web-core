@@ -1,3 +1,26 @@
+## [0.1.0] - 2026-08-28
+
+### 🚀 Features
+
+- *(ci)* Add coverage step summary, artifact, threshold, badge (#73)
+
+### 🐛 Bug Fixes
+
+- *(ci)* Keep_files on docs publish, was wiping the coverage badge (#74)
+- *(ci)* Parse coverage % without --format (unsupported on old coverage) (#75)
+- *(ci)* Grep the TOTAL line specifically, not the last line (#76)
+- Encode email before hashing for gravatar URL
+- *(ci)* Collect coverage data during the pytest run
+
+### 💼 Other
+
+- *(deps)* Migrate to uv for dependency management and task running
+
+### ⚙️ Miscellaneous Tasks
+
+- Update dependencies (uv lock --upgrade)
+- Replace broken semantic-release publish with the platform release-workflow family
+- Update dependencies (uv lock --upgrade)
 # Changelog
 
 <!--next-version-placeholder-->
